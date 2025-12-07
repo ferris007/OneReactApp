@@ -1,0 +1,73 @@
+workflows:
+  expo_ios:
+    name: Expo iOS Build
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+
+    environment:
+      xcode: 16.0
+      groups:
+        - expo_credentials
+        - expo_project_id
+        - mobile_env
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.threesixsixdegreefitechandsciinstitute.one
+
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm ci --legacy-peer-deps
+
+      - name: Expo prebuild
+        script: |
+          npx expo prebuild --platform ios --clean --no-install
+
+      - name: Create Export Options Plist
+        script: |
+          cat <<EOF > ${CM_BUILD_DIR}/ExportOptions.plist
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>method</key>
+              <string>app-store</string>
+              <key>signingStyle</key>
+              <string>manual</string>
+              <key>teamID</key>
+              <string>${APPLE_TEAM_ID}</string>
+              <key>provisioningProfiles</key>
+              <dict>
+                  <key>${CM_BUNDLE_ID}</key>
+                  <string>${CM_PROVISIONING_PROFILE_NAME}</string>
+              </dict>
+          </dict>
+          </plist>
+          EOF
+          
+      - name: Debug Signing Variables
+        script: |
+          echo "--- DEBUGGING SIGNING VARIABLES ---"
+          env | grep CM_
+
+      - name: Build IPA
+        script: |
+          # Passing signing details directly to the archive command
+          xcode-project build-ipa \
+            --workspace "ios/ONE.xcodeproj/project.xcworkspace" \
+            --scheme "ONE" \
+            --export-options-plist "${CM_BUILD_DIR}/ExportOptions.plist" \
+            --archive-xcargs="PROVISIONING_PROFILE_SPECIFIER=\"${CM_PROVISIONING_PROFILE_UUID}\" CODE_SIGN_IDENTITY=\"${CM_CERTIFICATE_COMMON_NAME}\""
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+
+
+
+
+
+
+
+
+
+

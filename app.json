@@ -1,0 +1,121 @@
+{
+  "expo": {
+    "scheme": "myapp",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "plugins": [
+      "expo-dev-client",
+      "expo-splash-screen",
+      "expo-router",
+      "expo-web-browser",
+      "@react-native-firebase/app",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static",
+            "deploymentTarget": "15.1"
+          },
+          "android": {
+            "kotlinVersion": "2.1.20"
+          }
+        }
+      ],
+      [
+        "react-native-ble-plx",
+        {
+          "isBackgroundEnabled": true,
+          "bluetoothAlwaysPermission": "We need Bluetooth access to connect with your smart scale."
+        }
+      ],
+      [
+        "react-native-health",
+        {
+          "healthSharePermission": "This app needs permission to read your health metrics.",
+          "healthUpdatePermission": "This app needs permission to write health metrics.",
+          "isClinicalDataEnabled": true,
+          "healthClinicalDescription": "Custom health share permission for clinical data"
+        }
+      ],
+      "react-native-health-connect"
+    ],
+    "name": "ONE AI Agent",
+    "slug": "one-mobile-native",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "supportsTablet": true,
+      "bundleIdentifier": "com.threesixsixdegreefitechandsciinstitute.one",
+      "buildNumber": "5",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSHealthShareUsageDescription": "We need Health access to read your weight and body measurements from your smart scale.",
+        "NSHealthUpdateUsageDescription": "We need Health access to save your weight and body measurements to the Health app.",
+        "NSLocationWhenInUseUsageDescription": "Your location is used by the AI Coach to provide location-aware responses and for tracking activities like running.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Your location is used to track workouts even when the app is in the background.",
+        "NSLocationAlwaysUsageDescription": "Your location is used to track workouts even when the app is in the background.",
+        "NSBluetoothPeripheralUsageDescription": "Bluetooth is required to connect to your LeFu smart scale to sync your measurements.",
+        "NSBluetoothAlwaysUsageDescription": "Bluetooth is required to maintain a connection with your LeFu smart scale.",
+        "NSMicrophoneUsageDescription": "The microphone is used for voice input to the AI Coach.",
+        "NSSpeechRecognitionUsageDescription": "Speech recogxnition is used to transcribe your voice commands for the AI Coach.",
+        "NSCameraUsageDescription": "The camera is used to upload photo evidence for activities and for food log uploads.",
+        "NSPhotoLibraryUsageDescription": "Access to your photo library is needed to select images for activity evidence and food logs.",
+        "NSHealthClinicalHealthRecordsShareUsageDescription": "Read and understand clinical health data."
+      },
+      "associatedDomains": [
+        "applinks:links.366degreefitresearch.com"
+      ]
+    },
+    "android": {
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "https",
+              "host": "links.366degreefitresearch.com",
+              "pathPrefix": "/verify"
+            },
+            {
+              "scheme": "https",
+              "host": "links.366degreefitresearch.com",
+              "pathPrefix": "/reset-password"
+            },
+            {
+              "scheme": "oneaiagent"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ],
+      "package": "com.threesixsixdegreefitechandsciinstitute.one"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "49f6ef4e-7acd-4022-a0a5-1c5b30a28d23"
+      },
+      "API_BASE_URL": "https://one-fitness-api-python-810351594632.us-central1.run.app"
+    }
+  }
+}

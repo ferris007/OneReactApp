@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "810351594632",
+    "project_id": "one-ai-digital-twin",
+    "storage_bucket": "one-ai-digital-twin.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810351594632:android:0fe9b3e6f0c7d9e499633d",
+        "android_client_info": {
+          "package_name": "com.threesixsixdegreefitechandsciinstitute.one"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq7E_tjq8NhrGtiVLC1FEfS0IZkp59thk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
